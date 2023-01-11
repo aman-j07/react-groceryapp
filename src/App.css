@@ -35,17 +35,28 @@
 
 .slidecvr--medium {
   max-height: 435px;
-
-  /* max-width: 90%; */
 }
 
 .slidecvr__img--medium  {
-    max-height: 220px;
+    height: 220px;
 }
 
-.categories  {
+.slidehead  {
+  height: 40px;
+}
+.gridsec  {
     display: grid;
     gap: 10px;
-    grid-template-columns: repeat(auto-fill,minmax(165px,1fr));
+}
 
+.gridsec--small  {
+    grid-template-columns: repeat(auto-fill,minmax(180px,1fr));
+}
+
+.gridsec--big  {
+  grid-template-columns: repeat(auto-fill,minmax(220px,1fr));
+}
+
+.bg-grey  {
+    background: #f1f1f1;
 }

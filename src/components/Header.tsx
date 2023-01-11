@@ -1,14 +1,19 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
-function Header() {
+interface IProps{
+  items:number
+}
+
+function Header(props:IProps) {
   return (
     <nav className="navbar navbar-expand-lg navbar-light bg-light px-3 shadow">
       <div className="container-fluid">
         <span className="navbar-brand d-flex flex-column gap-1">
-          <img
+          <Link to='/'><img
             src="https://martjackstorage.blob.core.windows.net/in-resources/075ba640-9325-4e0e-8157-cdf49e2a8909/Images/userimages/logo.jpg"
             alt="logo"
-          />
+          /></Link>
           <div className="btn-group">
           <button
             type="button"
@@ -79,19 +84,19 @@ function Header() {
               <span>Oasis Center Bangalore</span>
             </span>
           </button>
-          <button className="nav-link border-0 bg-transparent d-flex align-items-center fw-light px-1">
+          <Link to='/signInOut' className="text-decoration-none"><button className="nav-link border-0 bg-transparent d-flex align-items-center fw-light px-1">
             <i className="bi bi-person text-success fs-3"></i>
             <span className="text-start text-dark d-flex flex-column lh-1">
               Hello Signin to your account
             </span>
-          </button>
-          <button className="nav-link border-0 bg-transparent d-flex align-items-center fw-light px-1">
+          </button></Link>
+          <Link to='/cart' className="text-decoration-none"> <button className="nav-link border-0 bg-transparent d-flex align-items-center fw-light px-1">
             <i className="bi bi-cart3 text-success fs-3"></i>
             <span className="text-start text-dark d-flex flex-column lh-1">
-              <span className="shorttxt">My Cart</span>
-              <span>0 items</span>
+              <span className="shorttxt mb-1">My Cart</span>
+              <span className="text-danger fw-bold">{props.items} items</span>
             </span>
-          </button>
+          </button></Link>
         </div>
       </div>
     </nav>
