@@ -45,7 +45,9 @@ function SignInOut(props:IProps) {
     e.preventDefault();
     let found=users.findIndex((ele:user)=>ele.email===refEmail.current?.value)
     if(found>-1){
-      if(refEmail.current!==null&&refPassword.current!==null)
+      if(refEmail.current?.value!==''||refPassword.current?.value!==''){
+        alert('Please fill all the fields')
+      }else if(refEmail.current!==null&&refPassword.current!==null)
         {
           if(users[found].email===refEmail.current.value && users[found].password===refPassword.current.value){
             setUser(users[found])
