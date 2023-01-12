@@ -12,8 +12,8 @@ interface product{
   size: string,
   price: number,
   stock: string,
-  images: string[]
-  suggestion: string[]
+  images: string[],
+  suggestion: string[],
   allegations: string[]
 }
 
@@ -69,27 +69,40 @@ function SignInOut(props:IProps) {
 
   const signUp=(e:any)=>{
     e.preventDefault();
+    
     if(refEmail.current!==null&&refPassword.current!==null&&refPhone.current!==null && refEmail.current.value!==''&&refPassword.current.value!==''&&refPhone.current.value!==''){
-      let found=users.findIndex((ele:user)=>ele.email===refEmail.current?.value)
-      if(found>-1){
-        alert('User already exists')
-      }else{
-        let obj:user={
-          email:refEmail.current.value,
-          phone:Number(refPhone.current.value),
-          password:refPassword.current.value,
-          cart:[]
-        }
-        setUser(obj)
-        localStorage.setItem('user',JSON.stringify(obj))
-        let temp=users
-        temp.push(obj)
-        setUsers(temp)
-        localStorage.setItem('users',JSON.stringify(temp))
-        alert('Sign up successful')
-        e.target.reset()
-        navigate('/')
-      }
+      console.log('email- ',/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(refEmail.current.value))
+      console.log('password- ',/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$/.test(refPassword.current.value))
+      console.log('phone- ',/^[0-9]{10}$/.test(refPhone.current.value))
+      // let found=users.findIndex((ele:user)=>ele.email===refEmail.current?.value)
+      // if(found>-1){
+      //   alert('User already exists')
+      // }else{
+      //   if (!/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(refEmail.current.value)){
+      //     console.log('email- ',/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(refEmail.current.value))
+      //   }
+      //   if(!/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$/.test(refPassword.current.value)){
+      //     console.log('password- ',/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$/.test(refPassword.current.value))
+      //   }
+      //   if(!/^[0-9]{1,10}$/.test(refPhone.current.value)){
+      //     console.log('phone- ',/^[0-9]{1,10}$/.test(refPhone.current.value))
+      //   }
+      //   let obj:user={
+      //     email:refEmail.current.value,
+      //     phone:Number(refPhone.current.value),
+      //     password:refPassword.current.value,
+      //     cart:[]
+      //   }
+      //   setUser(obj)
+      //   localStorage.setItem('user',JSON.stringify(obj))
+      //   let temp=users
+      //   temp.push(obj)
+      //   setUsers(temp)
+      //   localStorage.setItem('users',JSON.stringify(temp))
+      //   alert('Sign up successful')
+      //   e.target.reset()
+      //   navigate('/')
+      // }
     }
     else{
       alert('Please fill all the fields')
