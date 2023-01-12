@@ -56,6 +56,7 @@ function SignInOut(props:IProps) {
             localStorage.setItem('user',JSON.stringify(users[found]))
             navigate('/')
             alert('Sign In successfull!')
+            e.target.reset();
           }
           else{
             alert('Entered credential are wrong!!')
@@ -86,6 +87,7 @@ function SignInOut(props:IProps) {
         setUsers(temp)
         localStorage.setItem('users',JSON.stringify(temp))
         alert('Sign up successful')
+        e.target.reset()
         navigate('/')
       }
     }
@@ -97,7 +99,7 @@ function SignInOut(props:IProps) {
   return (
       <div className="signInOut mx-auto my-4 border p-4 rounded-2 text-start">
         <h4 className="pb-2 border-2 border-bottom"> {sign==='up'?'Sign Up':'Sign In'} </h4>
-        <form className="my-2">
+        <form className="my-2" onSubmit={sign==='up'?signUp:signIn}>
           <div className="mb-3">
             <label htmlFor="exampleInputEmail1" className="form-label m-0">
               Email address
@@ -135,7 +137,7 @@ function SignInOut(props:IProps) {
               id="exampleInputPhone1"
             />
           </div>:''}
-          {sign==='up' ? <button type="submit" className="btn btn-success w-100 rounded-0" onClick={signUp}>Sign Up</button>:<button type="submit" className="btn btn-success rounded-0 w-100" onClick={signIn}>Sign In</button>}
+          {sign==='up' ? <button type="submit" className="btn btn-success w-100 rounded-0">Sign Up</button>:<button type="submit" className="btn btn-success rounded-0 w-100">Sign In</button>}
         </form>
         <span className="shorttxt">{sign==='in'?<>New user?<button className="btn btn-link shorttxt p-0" onClick={()=>{setSign('up')}}>Sign Up</button></>:<>Have an account?<button className="btn btn-link shorttxt p-0" onClick={()=>{setSign('in')}}>Sign In</button></>}</span>
       </div>
