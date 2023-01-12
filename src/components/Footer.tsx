@@ -2,7 +2,7 @@ import React from "react";
 
 function Footer() {
   return (
-    <section className="bg-grey">
+    <footer className="bg-grey">
       <div className="d-flex justify-content-between mt-2 p-4 border-bottom border-danger">
         <span className=''>Get new recipes & blogs in your inbox every week</span>
         <div className="d-flex">
@@ -40,7 +40,7 @@ function Footer() {
             <span className="text-start d-flex align-items-center gap-1"><i className="bi bi-headset text-success fs-4"></i> <span>#########</span></span>
         </span>
       </div>
-    </section>
+    </footer>
   );
 }
 

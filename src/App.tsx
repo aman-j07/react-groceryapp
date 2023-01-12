@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./App.css";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
@@ -22,6 +22,13 @@ interface product{
   images: string[]
   suggestion: string[]
   allegations: string[]
+}
+
+interface user{
+  email:string,
+  phone:number,
+  password:string,
+  cart:product[]
 }
 
 type cartProducts=product & {quantity:number}
@@ -466,15 +473,29 @@ const products = [
 
 function App() {
   const [cart,setCart]=useState<cartProducts[]>([])
+  const [users,setUsers]=useState<user[]>([])
+  const [user,setUser]=useState<user|null>(null)
+
+  useEffect(()=>{
+    let localUser=localStorage.getItem('user')
+    let localUsers=localStorage.getItem('users')
+    if(localUser){
+    setUser(JSON.parse(localUser))
+    }
+    if(localUsers){
+      setUsers(JSON.parse(localUsers))
+    }
+  },[])
+  
 
   return (
     <div className="App">
-      <Header items={cart.reduce<any>((total:number=0,ele:cartProducts)=>{return total+ele.quantity},0)}/>
+      <Header user={user} setUser={setUser} items={cart.reduce<any>((total:number=0,ele:cartProducts)=>{return total+ele.quantity},0)}/>
       <Routes>
         <Route path="/" element={<Home products={products} cart={cart} setCart={setCart}/>}/>
         <Route path="/cart" element={<Cart cart={cart} setCart={setCart}/>}/>
         <Route path="/about" element={<About/>}/>
-        <Route path="'signInOut" element={<SignInOut/>}/>
+        <Route path="/signInOut" element={<SignInOut user={user} setUser={setUser} users={users} setUsers={setUsers}/>}/>
       </Routes>
       <Footer />
     </div>

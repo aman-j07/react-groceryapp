@@ -60,12 +60,10 @@ function Home(props:IProps){
     let id=products[ind]._id
     let found=cart.findIndex((ele:product)=>ele._id===id)
     if(found===-1){
-      console.log('Not found= ',found)
       let obj={...products[ind],quantity:1}
       cart.push(obj)
     }
     else{
-      console.log('found= ',found)
       cart[found].quantity++;
     }
     setCart([...cart])    

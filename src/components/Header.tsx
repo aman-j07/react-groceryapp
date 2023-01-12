@@ -1,7 +1,32 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
+interface product{
+  _id: string,
+  title: string,
+  description: string
+  category: string,
+  brand: string,
+  expDate: string,
+  mfdDate: string,
+  size: string,
+  price: number,
+  stock: string,
+  images: string[]
+  suggestion: string[]
+  allegations: string[]
+}
+
+interface user{
+  email:string,
+  phone:number,
+  password:string,
+  cart:product[]
+}
+
 interface IProps{
+  user:user|null,
+  setUser:React.Dispatch<React.SetStateAction<user|null>>,
   items:number
 }
 
@@ -77,24 +102,28 @@ function Header(props:IProps) {
               </span>
             </div>
           </div>
-          <button className="nav-link border-0 bg-transparent d-flex align-items-center fw-light px-1">
+          <Link to='/about' className="text-decoration-none"><button className="nav-link border-0 bg-transparent d-flex align-items-center fw-light px-1">
             <i className="bi bi-geo-alt text-success fs-3"></i>
             <span className="text-start text-dark d-flex flex-column lh-1">
-              <span className="shorttxt">Home Delivery</span>
-              <span>Oasis Center Bangalore</span>
-            </span>
-          </button>
-          <Link to='/signInOut' className="text-decoration-none"><button className="nav-link border-0 bg-transparent d-flex align-items-center fw-light px-1">
-            <i className="bi bi-person text-success fs-3"></i>
-            <span className="text-start text-dark d-flex flex-column lh-1">
-              Hello Signin to your account
+              <span className="shorttxt">About Us</span>
             </span>
           </button></Link>
+          {props.user===null?<Link to='/signInOut' className="text-decoration-none"><button className="nav-link border-0 bg-transparent d-flex align-items-center fw-light px-1">
+            <i className="bi bi-person text-success fs-3"></i>
+            <span className="text-start text-dark d-flex flex-column lh-1">
+              Signin
+            </span>
+          </button></Link>:<button onClick={()=>{localStorage.setItem('user',''); props.setUser(null)}} className="nav-link border-0 bg-transparent d-flex align-items-center fw-light px-1">
+            <i className="bi bi-person text-success fs-3"></i>
+            <span className="text-start text-dark d-flex flex-column lh-1">
+              Sign Out
+            </span>
+          </button>}
           <Link to='/cart' className="text-decoration-none"> <button className="nav-link border-0 bg-transparent d-flex align-items-center fw-light px-1">
             <i className="bi bi-cart3 text-success fs-3"></i>
             <span className="text-start text-dark d-flex flex-column lh-1">
-              <span className="shorttxt mb-1">My Cart</span>
-              <span className="text-danger fw-bold">{props.items} items</span>
+              <span className="shorttxt mb-1">Cart</span>
+              <span className="text-danger fw-bold shorttxt">{props.items} items</span>
             </span>
           </button></Link>
         </div>
