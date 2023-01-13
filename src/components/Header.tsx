@@ -1,31 +1,9 @@
 import React from "react";
 import { Link } from "react-router-dom";
-
-interface product{
-  _id: string,
-  title: string,
-  description: string
-  category: string,
-  brand: string,
-  expDate: string,
-  mfdDate: string,
-  size: string,
-  price: number,
-  stock: string,
-  images: string[]
-  suggestion: string[]
-  allegations: string[]
-}
-
-interface user{
-  email:string,
-  phone:number,
-  password:string,
-  cart:product[]
-}
+import { user } from "../types";
 
 interface IProps{
-  user:user|null,
+  user:user |null,
   setUser:React.Dispatch<React.SetStateAction<user|null>>,
   items:number
 }

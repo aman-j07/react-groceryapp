@@ -1,21 +1,6 @@
 import React from 'react'
 import {Link} from 'react-router-dom'
-
-interface product{
-  _id: string,
-  title: string,
-  description: string
-  category: string,
-  brand: string,
-  expDate: string,
-  mfdDate: string,
-  size: string,
-  price: number,
-  stock: string,
-  images: string[]
-  suggestion: string[]
-  allegations: string[]
-}
+import { product } from '../types'
 
 type cartProducts=product & {quantity:number}
 

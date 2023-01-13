@@ -7,29 +7,8 @@ import Cart from "./components/Cart";
 import About from "./components/About";
 import SignInOut from "./components/SignInOut";
 import { Route, Routes } from "react-router-dom";
+import { product, user } from "./types";
 
-interface product{
-  _id: string,
-  title: string,
-  description: string
-  category: string,
-  brand: string,
-  expDate: string,
-  mfdDate: string,
-  size: string,
-  price: number,
-  stock: string,
-  images: string[]
-  suggestion: string[]
-  allegations: string[]
-}
-
-interface user{
-  email:string,
-  phone:number,
-  password:string,
-  cart:product[]
-}
 
 type cartProducts=product & {quantity:number}
 
@@ -473,7 +452,7 @@ const products = [
 
 function App() {
   const [cart,setCart]=useState<cartProducts[]>([])
-  const [users,setUsers]=useState<user[]>([])
+  const [users,setUsers]=useState<user []>([])
   const [user,setUser]=useState<user|null>(null)
 
   // Populating local storage values in state

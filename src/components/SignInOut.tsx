@@ -1,28 +1,6 @@
 import React, { useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
-
-interface product{
-  _id: string,
-  title: string,
-  description: string
-  category: string,
-  brand: string,
-  expDate: string,
-  mfdDate: string,
-  size: string,
-  price: number,
-  stock: string,
-  images: string[],
-  suggestion: string[],
-  allegations: string[]
-}
-
-interface user{
-  email:string,
-  phone:number,
-  password:string,
-  cart:product[]
-}
+import { user } from "../types";
 
 interface IProps{
   user:user|null,
@@ -90,7 +68,6 @@ function SignInOut(props:IProps) {
           email:refEmail.current.value,
           phone:Number(refPhone.current.value),
           password:refPassword.current.value,
-          cart:[]
         }
         setUser(obj)
         localStorage.setItem('user',JSON.stringify(obj))
