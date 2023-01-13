@@ -39,6 +39,9 @@ function SignInOut(props:IProps) {
   const refEmail=useRef<HTMLInputElement>(null)
   const refPhone=useRef<HTMLInputElement>(null)
   const refPassword=useRef<HTMLInputElement>(null)
+  const refEmailErr=useRef<HTMLParagraphElement>(null)
+  const refPhoneErr=useRef<HTMLParagraphElement>(null)
+  const refPasswordErr=useRef<HTMLParagraphElement>(null)
   
 
   const signIn=(e:any)=>{
@@ -70,39 +73,42 @@ function SignInOut(props:IProps) {
   const signUp=(e:any)=>{
     e.preventDefault();
     
-    if(refEmail.current!==null&&refPassword.current!==null&&refPhone.current!==null && refEmail.current.value!==''&&refPassword.current.value!==''&&refPhone.current.value!==''){
-      console.log('email- ',/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(refEmail.current.value))
-      console.log('password- ',/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$/.test(refPassword.current.value))
-      console.log('phone- ',/^[0-9]{10}$/.test(refPhone.current.value))
-      // let found=users.findIndex((ele:user)=>ele.email===refEmail.current?.value)
-      // if(found>-1){
-      //   alert('User already exists')
-      // }else{
-      //   if (!/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(refEmail.current.value)){
-      //     console.log('email- ',/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(refEmail.current.value))
-      //   }
-      //   if(!/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$/.test(refPassword.current.value)){
-      //     console.log('password- ',/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$/.test(refPassword.current.value))
-      //   }
-      //   if(!/^[0-9]{1,10}$/.test(refPhone.current.value)){
-      //     console.log('phone- ',/^[0-9]{1,10}$/.test(refPhone.current.value))
-      //   }
-      //   let obj:user={
-      //     email:refEmail.current.value,
-      //     phone:Number(refPhone.current.value),
-      //     password:refPassword.current.value,
-      //     cart:[]
-      //   }
-      //   setUser(obj)
-      //   localStorage.setItem('user',JSON.stringify(obj))
-      //   let temp=users
-      //   temp.push(obj)
-      //   setUsers(temp)
-      //   localStorage.setItem('users',JSON.stringify(temp))
-      //   alert('Sign up successful')
-      //   e.target.reset()
-      //   navigate('/')
-      // }
+    if(refEmail.current!==null&&refPassword.current!==null&&refPhone.current!==null && refEmailErr.current!==null&&refPasswordErr.current!==null &&refPhoneErr.current!==null&&refEmail.current.value!==''&&refPassword.current.value!==''&&refPhone.current.value!==''){
+      (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(refEmail.current.value))?refEmailErr.current.innerText='':refEmailErr.current.innerText='Please enter valid email';
+      (/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$/.test(refPassword.current.value))?refPasswordErr.current.innerText='':refPasswordErr.current.innerText='Password must contain minimum 8 characters with minimum 1 lowercase,uppercase,number and a special chracter.';
+      (/^[0-9]{10}$/.test(refPhone.current.value))?refPhoneErr.current.innerText='':refPhoneErr.current.innerText='Phone number should be of 10 numbers'
+      if(refEmailErr.current.innerText!==''||refPasswordErr.current.innerText!==''||refPhoneErr.current.innerText!==''){
+        return;
+      }
+      let found=users.findIndex((ele:user)=>ele.email===refEmail.current?.value)
+      if(found>-1){
+        alert('User already exists')
+      }else{
+        if (!/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(refEmail.current.value)){
+          console.log('email- ',/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(refEmail.current.value))
+        }
+        if(!/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$/.test(refPassword.current.value)){
+          console.log('password- ',/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$/.test(refPassword.current.value))
+        }
+        if(!/^[0-9]{1,10}$/.test(refPhone.current.value)){
+          console.log('phone- ',/^[0-9]{1,10}$/.test(refPhone.current.value))
+        }
+        let obj:user={
+          email:refEmail.current.value,
+          phone:Number(refPhone.current.value),
+          password:refPassword.current.value,
+          cart:[]
+        }
+        setUser(obj)
+        localStorage.setItem('user',JSON.stringify(obj))
+        let temp=users
+        temp.push(obj)
+        setUsers(temp)
+        localStorage.setItem('users',JSON.stringify(temp))
+        alert('Sign up successful')
+        e.target.reset()
+        navigate('/')
+      }
     }
     else{
       alert('Please fill all the fields')
@@ -125,6 +131,7 @@ function SignInOut(props:IProps) {
               id="exampleInputEmail1"
               aria-describedby="emailHelp"
             />
+            <p className='vshorttxt text-danger' ref={refEmailErr}></p>
           </div>
           <div className="mb-3">
             <label htmlFor="exampleInputPassword1" className="form-label m-0">
@@ -137,6 +144,7 @@ function SignInOut(props:IProps) {
               className="form-control"
               id="exampleInputPassword1"
             />
+            <p className='vshorttxt text-danger' ref={refPasswordErr}></p>
           </div>
           {sign==='up'?<div className="mb-3">
             <label htmlFor="exampleInputPhone1" className="form-label m-0">
@@ -149,6 +157,7 @@ function SignInOut(props:IProps) {
               className="form-control"
               id="exampleInputPhone1"
             />
+            <p className='vshorttxt text-danger' ref={refPhoneErr}></p>
           </div>:''}
           {sign==='up' ? <button type="submit" className="btn btn-success w-100 rounded-0">Sign Up</button>:<button type="submit" className="btn btn-success rounded-0 w-100">Sign In</button>}
         </form>

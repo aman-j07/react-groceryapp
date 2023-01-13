@@ -8,6 +8,10 @@
     font-size: 14px;
 }
 
+.vshorttxt  {
+  font-size: 12px;
+}
+
 .slidecvr--big {
     max-height: 400px;
 }
