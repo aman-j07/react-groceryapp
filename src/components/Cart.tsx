@@ -27,6 +27,7 @@ interface IProps{
 function Cart(props:IProps) {
   const {cart,setCart}=props
 
+  // Function to edit quantity of product in cart 
   const editQuantity=(todo:string,ind:number)=>{
     if(todo==='increase'){
       cart[ind].quantity++;
@@ -41,6 +42,7 @@ function Cart(props:IProps) {
     setCart([...cart])
   }
 
+  // Function to delete item from cart
   const deleteItem=(ind:number)=>{
     cart.splice(ind,1)
     setCart([...cart])

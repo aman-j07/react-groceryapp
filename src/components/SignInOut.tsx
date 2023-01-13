@@ -43,7 +43,7 @@ function SignInOut(props:IProps) {
   const refPhoneErr=useRef<HTMLParagraphElement>(null)
   const refPasswordErr=useRef<HTMLParagraphElement>(null)
   
-
+// Function to check for existing user and sign in
   const signIn=(e:any)=>{
     e.preventDefault();
     if(refEmail.current?.value===''||refPassword.current?.value===''){
@@ -73,6 +73,8 @@ function SignInOut(props:IProps) {
   const signUp=(e:any)=>{
     e.preventDefault();
     
+    // checking for null values for refs required in typescript template and empty values
+
     if(refEmail.current!==null&&refPassword.current!==null&&refPhone.current!==null && refEmailErr.current!==null&&refPasswordErr.current!==null &&refPhoneErr.current!==null&&refEmail.current.value!==''&&refPassword.current.value!==''&&refPhone.current.value!==''){
       (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(refEmail.current.value))?refEmailErr.current.innerText='':refEmailErr.current.innerText='Please enter valid email';
       (/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$/.test(refPassword.current.value))?refPasswordErr.current.innerText='':refPasswordErr.current.innerText='Password must contain minimum 8 characters with minimum 1 lowercase,uppercase,number and a special chracter.';
@@ -84,15 +86,6 @@ function SignInOut(props:IProps) {
       if(found>-1){
         alert('User already exists')
       }else{
-        if (!/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(refEmail.current.value)){
-          console.log('email- ',/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(refEmail.current.value))
-        }
-        if(!/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$/.test(refPassword.current.value)){
-          console.log('password- ',/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$/.test(refPassword.current.value))
-        }
-        if(!/^[0-9]{1,10}$/.test(refPhone.current.value)){
-          console.log('phone- ',/^[0-9]{1,10}$/.test(refPhone.current.value))
-        }
         let obj:user={
           email:refEmail.current.value,
           phone:Number(refPhone.current.value),

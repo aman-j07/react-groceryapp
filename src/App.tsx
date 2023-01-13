@@ -476,6 +476,7 @@ function App() {
   const [users,setUsers]=useState<user[]>([])
   const [user,setUser]=useState<user|null>(null)
 
+  // Populating local storage values in state
   useEffect(()=>{
     let localUser=localStorage.getItem('user')
     let localUsers=localStorage.getItem('users')
